@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShekarFit — 90-Day Aesthetic Transformation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Space+Grotesk:wght@700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Color system (alive yet calm) */
+      --bg:#0A0B0D;
+      --surface:#12141A;
+      --surface-2:#0E1013;
+      --text:#F1F5F7;
+      --muted:#A7AFB7;
+      --primary:#0C7E73;
+      --primary-600:#0A7268;
+      --accent:#F59E0B;
+      --border:#2A3036;
+      --wa:#25D366;
+      --focus:#F59E0B;
+
+      /* Glass tokens (limited use) */
+      --glass: rgba(255,255,255,.06);
+      --glass-border: rgba(255,255,255,.24);
+
+      /* Spacing (4pt grid) */
+      --s-0:4px; --s-1:8px; --s-2:12px; --s-3:16px; --s-4:20px; --s-5:24px; --s-6:28px; --s-7:40px; --s-8:48px; --s-10:56px;
+
+      /* Type scale */
+      --h1:32px; --h2:24px; --h3:20px; --body:16px; --small:14px; --cta:16px;
+
+      /* Radii & shadows */
+      --r-xl:22px; --r-lg:16px; --r-md:12px; --r-sm:10px;
+      --shadow-cta:0 8px 24px rgba(12,126,115,.24);
+
+      /* Layout width */
+      --maxW: clamp(560px, 92vw, 1120px);
+
+      /* Sticky bar height */
+      --stickyH: 72px;
+    }
+    html,body{background:var(--bg); color:var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
+    *{box-sizing:border-box}
+    img, video { max-width: 100%; height: auto; display:block; }
+    body { padding-bottom: calc(var(--stickyH) + env(safe-area-inset-bottom)); }
+
+    .shell{display:flex;flex-direction:column;align-items:center}
+    .wrap{width:100%; max-width:var(--maxW); padding:var(--s-7) var(--s-4)}
+    .stripe{position:relative; border-radius:var(--r-xl); border:1px solid var(--border); background:linear-gradient(180deg, var(--surface), var(--surface-2));}
+    .stripe:before{content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:.15;
+      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0, rgba(255,255,255,.06) 2px, transparent 2px, transparent 6px);
+    }
+    .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s-6)}
+    .glass{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);}
+    .chip{display:inline-flex;align-items:center;gap:var(--s-1);background:var(--accent);color:#0A0A0A;border-radius:999px;padding:8px 14px;font-weight:800;font-size:var(--small)}
+    .chip.pulse{animation:pulse 1.8s ease-in-out infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+    .h1{font-family:"Space Grotesk", Inter, system-ui, sans-serif; font-weight:800; font-size:var(--h1); line-height:1.18; margin:var(--s-3) 0 var(--s-2)}
+    .sub{color:var(--muted); font-size:var(--body); line-height:1.6; margin-bottom:var(--s-4)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:var(--r-md);font-weight:800;border:0;cursor:pointer;transition:transform .12s ease, background .15s ease;min-height:52px; font-size:16px}
+    .btn:active{transform:translateY(1px)}
+    .btn:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+    .btn-primary{background:var(--primary); color:#fff; box-shadow:var(--shadow-cta)}
+    .btn-primary:hover{background:var(--primary-600)}
+    .btn-ghost{background:transparent; color:var(--text); border:1px solid var(--border)}
+    .btn-wa{background:var(--wa); color:#0A0A0A; font-weight:700}
+    .row{display:flex;flex-wrap:wrap;gap:var(--s-3)}
+    .tile{background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s-4)}
+    .section{margin:var(--s-7) 0}
+    h2{font-family:"Space Grotesk", Inter, system-ui, sans-serif; font-size:var(--h2); margin:0 0 var(--s-3)}
+    .grid3{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:var(--s-3)}
+    .grid2{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:var(--s-3)}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--border);color:var(--muted);font-size:13px}
+    .pricing{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:var(--s-3)}
+    .plan{border:1px solid var(--border);border-radius:var(--r-xl);padding:var(--s-5);position:relative;transition:transform .15s ease; background:var(--surface)}
+    .plan:hover{transform:translateY(-2px)}
+    .plan h3{margin:0 0 var(--s-2)}
+    .price{font-size:28px;font-weight:900;margin:var(--s-1) 0 var(--s-3); font-variant-numeric: tabular-nums}
+    .plan.glassy{background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(10px)}
+    .glow{box-shadow:0 0 0 8px rgba(12,126,115,.18), 0 0 0 1px var(--primary) inset}
+    .metrics{white-space:pre-line}
+    .faq-item{border:1px solid var(--border);border-radius:var(--r-md);padding:var(--s-3)}
+    .sticky-bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--border);padding:10px env(safe-area-inset-right) calc(10px + env(safe-area-inset-bottom)) env(safe-area-inset-left);display:flex;gap:10px;z-index:60; height: var(--stickyH)}
+    .sticky-bar .btn{flex:1}
+
+    /* Hero visuals */
+    .hero-media{position:relative;overflow:hidden;border-radius:var(--r-xl);border:1px solid var(--border)}
+    .hero-media video{width:100%;height:auto;display:block;filter:saturate(105%) contrast(102%)}
+    .hero-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-between;padding:var(--s-3);gap:var(--s-3)}
+    .hero-counters{display:flex;gap:var(--s-3);flex-wrap:wrap}
+    .hero-counter{background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-radius:14px;padding:8px 10px;min-width:92px;text-align:center}
+    .hero-counter .num{font-weight:900;font-size:18px; font-variant-numeric: tabular-nums}
+    .hero-counter .lab{font-size:12px;color:var(--muted)}
+    .scribble{font-family:'Caveat', cursive; font-size:22px; transform:rotate(-2.5deg); background:var(--glass); border:1px dashed var(--glass-border); padding:4px 8px; border-radius:10px}
+
+    /* Reveal */
+    [data-reveal]{opacity:.001;transform:translateY(10px);transition:opacity .35s ease, transform .35s ease}
+    .is-visible{opacity:1;transform:none}
+
+    .divider{height:1px;background:var(--border);margin:var(--s-6) 0}
+
+    @supports not ((backdrop-filter: blur(10px))) { .glass{background:rgba(12,126,115,.08);} }
+
+    /* Responsive tweaks */
+    @media (max-width: 900px){ .wrap{ padding: var(--s-6) var(--s-4); } }
+    @media (max-width:768px){
+      .grid3{grid-template-columns:repeat(2, minmax(0,1fr))}
+      .hero-overlay{flex-direction:column; align-items:flex-start; justify-content:flex-end}
+      .hero-counter{min-width: 88px}
+    }
+    @media (max-width:540px){
+      :root{--h1:30px; --h2:22px}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .wrap{padding:var(--s-6) var(--s-4);
+      width: 345px;}
+    }
+    /* Desktop upgrades */
+    @media (min-width:1064px){
+      :root{ --h1:40px; --h2:28px; }
+      .card{ padding: 32px; }
+      .grid3{ gap: var(--s-4); }
+      .grid2{ gap: var(--s-4); }
+      .hero-overlay{ padding: var(--s-6); }
+      .wrap{ padding-left: var(--s-5); padding-right: var(--s-5); }
+    }
+    @media (min-width:1280px){
+      :root{ --maxW: clamp(720px, 86vw, 1200px); --h1:44px; --h2:30px; }
+      .price{ font-size:30px; }
+    }
+    @media (prefers-reduced-motion: reduce){ .chip.pulse{animation:none} .btn{transition:none} }
+
+    /* ===== Horizontal carousel (PROOF) ===== */
+    .muted{ color: var(--muted); }
+    .hscroll-wrap{ position:relative; }
+    .hscroll{ display:flex; overflow-x:auto; gap:var(--s-3); scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding: var(--s-2) 2px var(--s-2) 2px; }
+    .hscroll::-webkit-scrollbar{ height:10px }
+    .hscroll::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 999px }
+    .hitem{ scroll-snap-align:start; flex:0 0 auto; width: calc(50% - (var(--s-3)/2)); }
+    .meta-row{ display:flex; justify-content:space-between; margin-top:var(--s-2); gap: 8px }
+
+    /* >>> Equal-size frames for Before/After */
+    .pair{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-2); }
+    .pair figure{
+      position:relative; margin:0;
+      aspect-ratio: 3 / 4;
+      overflow:hidden; border-radius: var(--r-md);
+      border:1px solid var(--border); background:#0f1113;
+    }
+    .pair img{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .figcap{ font-size:12px; color: var(--muted); margin-top:6px; text-align:center }
+    .cnav{ position:absolute; top:50%; transform: translateY(-50%); z-index:5; background: var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--text); width:38px; height:38px; border-radius:50%; display:grid; place-items:center; cursor:pointer; }
+    .cnav:disabled{ opacity:.4; cursor:default }
+    .nav-prev{ left:6px }
+    .nav-next{ right:6px }
+    .hscroll-wrap::before, .hscroll-wrap::after{ content:""; position:absolute; top:0; bottom:0; width:42px; pointer-events:none; }
+    .hscroll-wrap::before{ left:0; background: linear-gradient(90deg, var(--surface) 12%, transparent); }
+    .hscroll-wrap::after{ right:0; background: linear-gradient(270deg, var(--surface) 12%, transparent); }
+    @media (max-width: 900px){ .hitem{ width: calc(100% - 6px); } }
+
+    /* ===== Uniform thumbnail grid (Results & Receipts) ===== */
+    .thumb-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: var(--s-3);
+    }
+    .thumb-box{
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      background: #0f1113;
+    }
+    .thumb-box img.thumb{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+    @media (max-width:520px){
+      .thumb-grid{ grid-template-columns: 1fr; }
+    }
+
+    /* ===== Lightbox (Results & Receipts only) ===== */
+    .lightbox{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.86);
+      display: none; align-items: center; justify-content: center;
+      z-index: 999;
+      padding: 24px;
+    }
+    .lightbox.open{ display: flex; }
+    .lightbox img{
+      max-width: 95vw; max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+      outline: 1px solid rgba(255,255,255,.1);
+      transition: transform .2s ease;
+    }
+    .lb-close{
+      position: absolute; top: 14px; right: 14px;
+      background: var(--glass); border:1px solid var(--glass-border);
+      color: var(--text); width: 40px; height: 40px; border-radius: 999px;
+      display:grid; place-items:center; font-size: 22px; cursor: pointer;
+    }
+    .lb-close:focus-visible{ outline:2px solid var(--focus); outline-offset:2px }
+
+    /* ===== Coach photo fixed size ===== */
+    .coach-row{ align-items:flex-start; gap:var(--s-4); }
+    .coach-photo{
+      width: 240px;
+      height: 283px;
+      object-fit: cover;
+      border-radius: var(--r-lg);
+      /* border: 1px solid var(--border); */
+      /* background:#0f1113; */
+      flex: 0 0 auto;
+      margin-left: 45px;
+    }
+    @media (max-width:540px){
+      .coach-photo{
+        width: 200px;
+        height: 236px; /* proportional downscale for very small screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <!-- ===== STICKY HEADER ===== -->
+    <nav class="wrap" style="padding-top: var(--s-5); padding-bottom: 0%;">
+      <div class="row" style="justify-content:space-between; align-items:center; width:100%">
+        <div style="font-family:'Space Grotesk', sans-serif; font-weight:900; letter-spacing:.3px">SHEKAR<span style="color:var(--primary)">FIT</span></div>
+        <div class="row" style="gap:var(--s-2)">
+          <button class="btn btn-ghost" id="langToggle" aria-label="Toggle language">EN</button>
+          <button class="btn btn-ghost" id="toPricing">Pricing</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="wrap section stripe" id="hero" data-reveal>
+      <div class="chip pulse" aria-label="Seats left">8 seats · closes Sun 11:59 PM</div>
+      <h1 class="h1">Look clean and athletic in 90 days.</h1>
+      <p class="sub">Plans: 3 / 6 / 12 months • 1:1 coaching • Indian diet • Daily WhatsApp • Video form fixes</p>
+      <div class="hero-media">
+<video autoplay controls playsinline poster="https://placehold.co/1200x600?text=Hero+Poster">
+  <source src="22 to 4 percent body fat in 75 days (science-based explained ).mp4" type="video/mp4" />
+</video>
+
+
+        <div class="hero-overlay"><div class="hero-counters"></div></div>
+      </div>
+      <div class="row" style=" margin-top:var(--s-3) ">
+        <div class="badge">UPI / Razorpay</div>
+        <div class="badge">No crash diets · Gym/Home plan</div>
+      </div>
+      <a class="btn btn-primary" id="ctaHero" style="margin-top: 10px;" href="#" target="_blank" rel="noopener" data-i18n="heroCta">Start 60-sec Fit Quiz</a>
+    </header>
+
+    <!-- ===== PROOF ===== -->
+    <section class="wrap section card" id="proof" data-reveal>
+      <h2>Real transformations</h2>
+
+      <div class="hscroll-wrap" id="proofCarousel">
+        <button class="cnav nav-prev" aria-label="Previous">&#10094;</button>
+        <button class="cnav nav-next" aria-label="Next">&#10095;</button>
+
+        <div class="hscroll">
+          <!-- Pair 1 -->
+          <article class="hitem tile">
+            <div class="pair">
+              <figure><img loading="lazy" src="/static/G1.webp" alt="Client 1 before" /><figcaption class="figcap">Before</figcaption></figure>
+              <figure><img loading="lazy" src="/static/G2.webp" alt="Client 1 after" /><figcaption class="figcap">After</figcaption></figure>
+            </div>
+            <div class="meta-row"><span class="muted"></span><strong>-9.1 kg · 90 days · Hyderabad</strong></div>
+          </article>
+
+          <!-- Pair 2 -->
+          <article class="hitem tile">
+            <div class="pair">
+              <figure><img loading="lazy" src="/static/t3.webp" alt="Client 2 before" /><figcaption class="figcap">Before</figcaption></figure>
+              <figure><img loading="lazy" src="/static/naresh.heic" alt="Client 2 after" /><figcaption class="figcap">After</figcaption></figure>
+            </div>
+            <div class="meta-row"><span class="muted"></span><strong>-9.2 kg · 90 days · Hyderabad</strong></div>
+          </article>
+
+          <!-- Pair 3 -->
+          <article class="hitem tile">
+            <div class="pair">
+              <figure><img loading="lazy" src="/static/E1.webp" alt="Client 3 before" /><figcaption class="figcap">Before</figcaption></figure>
+              <figure><img loading="lazy" src="/static/E2.webp" alt="Client 3 after" /><figcaption class="figcap">After</figcaption></figure>
+            </div>
+            <div class="meta-row"><span class="muted"></span><strong>-7.5 kg · 14 weeks · Hyderabad</strong></div>
+          </article>
+
+          <!-- Pair 4 -->
+          <article class="hitem tile">
+            <div class="pair">
+              <figure><img loading="lazy" src="/static/t1.webp" alt="Client 4 before" /><figcaption class="figcap">Before</figcaption></figure>
+              <figure><img loading="lazy" src="/static/t2.webp" alt="Client 4 after" /><figcaption class="figcap">After</figcaption></figure>
+            </div>
+            <div class="meta-row"><span class="muted"></span><strong>-6.1 kg · 10 weeks · Hyderabad</strong></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRANSPARENCY BOX ===== -->
+    <section class="wrap section card" id="label" data-reveal>
+      <h2>What is inside (and what is not)</h2>
+      <div class="grid2">
+        <div class="tile">
+          <strong>Inside the 90-day system</strong>
+          <ul style=" margin:var(--s-2) 0 0 18px; color:var(--text) ">
+            <li>Weekly calories, protein, steps</li>
+            <li>Gym or home workouts + video form fixes</li>
+            <li>Weekly workout form check-ins</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <strong style=" color:var(--muted) ">Not included (on purpose)</strong>
+          <ul style=" margin:var(--s-2) 0 0 18px; color:var(--muted) ">
+            <li>Crash diets or detox tea promises</li>
+            <li>Fake before/after lighting tricks</li>
+            <li>"4-week abs" nonsense</li>
+            <li>AI spam plans</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+   <!-- ===== PRICING ===== -->
+<section class="wrap section card" id="pricing" data-reveal>
+  <h2>Pricing</h2>
+  <div class="pricing">
+    <div class="plan" id="plan-3m">
+      <h3>3 Months</h3>
+      <div class="price">₹18,000</div>
+      <ul style="color:var(--muted); margin:0 0 var(--s-3) 18px">
+        <li>Weekly plans (diet + training)</li>
+        <li>Weekly check-ins</li>
+        <li>Video form fixes</li>
+      </ul>
+      <button class="btn btn-primary pay-btn" data-amount="18000">Secure this plan</button>
+    </div>
+
+    <div class="plan glassy" id="plan-6m">
+      <div class="chip" style="position:absolute; top:-14px; right:14px">Most popular</div>
+      <h3>6 Months</h3>
+      <div class="price">₹35,000</div>
+      <ul style="color:var(--muted); margin:0 0 var(--s-3) 18px">
+        <li>All 3-month features</li>
+        <li>+ Two 15-min calls/month</li>
+        <li>Festival/travel templates</li>
+      </ul>
+      <div style="color:var(--muted); margin:-4px 0 var(--s-3)">Split Payments acceptable.</div>
+      <button class="btn btn-primary pay-btn" data-amount="35000">Secure this plan</button>
+    </div>
+
+   
+    <div class="plan" id="plan-12m">
+      <h3>12 Months</h3>
+      <div class="price">₹70,000</div>
+      <ul style="color:var(--muted); margin:0 0 var(--s-3) 18px">
+        <li>Monthly review</li>
+        <li>Long-term consistency systems</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="btn btn-primary pay-btn" data-amount="70000">Secure this plan</button>
+    </div>
+  </div>
+  <div class="tile" style="margin-top:var(--s-3)">
+    <div style="color:var(--muted); margin-top:var(--s-2)">UPI/NetBanking/Cards via Razorpay</div>
+  </div>
+</section>
+
+<!-- Razorpay Checkout Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+document.querySelectorAll(".pay-btn").forEach(btn => {
+  btn.addEventListener("click", async function() {
+    let amount = this.dataset.amount;
+
+    // 1. Create order from backend
+    let orderRes = await fetch("/create_order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: parseInt(amount) })   // ✅ Fixed here
+    });
+    let order = await orderRes.json();
+
+    // 2. Open Razorpay Checkout
+    let options = {
+      "key": "{{ key_id }}",   // Passed from Flask
+      "amount": order.amount,
+      "currency": order.currency,
+      "order_id": order.id,
+      "name": "Your Brand",
+      "description": "Plan Payment",
+      "handler": async function (response) {
+        // 3. Verify payment on backend
+        let verifyRes = await fetch("/verify_payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(response)
+        });
+        let result = await verifyRes.json();
+        if (result.status === "success") {
+          alert("✅ Payment Successful! ID: " + result.payment_id);
+        } else {
+          alert("❌ Payment Failed: " + result.reason);
+        }
+      }
+    };
+    let rzp = new Razorpay(options);
+    rzp.open();
+  });
+});
+</script>
+
+    <!-- ===== RESULTS & RECEIPTS ===== -->
+    <section class="wrap section card" id="social" data-reveal>
+      <h2>Results & Receipts</h2>
+      <p style=" color:var(--muted) ">Proof that reduces risk: before/after, logs. This answers "Does it work for people like me?"</p>
+      <div class="grid2">
+        <div class="tile">
+          <div style=" color:var(--muted) ">Carousel preview</div>
+
+          <!-- Uniform, responsive grid -->
+          <div class="thumb-grid" style=" margin-top:var(--s-2) ">
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/@thakur__gourav_singh 1.jpg" alt="Carousel B/A" />
+            </div>
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/WhatsApp Image 2025-08-31 at 23.27.06_0e42e39f.jpg " alt="InBody sheet 1" />
+            </div>
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/@thakur__gourav_singh 2.jpg" alt="Carousel B/A front" />
+            </div>
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/WhatsApp Image 2.jpg" alt="InBody sheet 2" />
+            </div>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="metrics"><strong data-count="14" data-format="int">0</strong> check-ins in total 90 days · <strong data-count="89" data-format="int">0</strong>% adherence
+
+Body weight :
+Before - 78.8kg
+After  - 69.1kg
+
+PBF (body fat):
+Before - 31%
+After  - 15.5%
+
+Muscle mass : 
+Before - 30.5%
+After - 33.2%</div>
+          <div style=" color:var(--muted); margin-top:var(--s-2) ">Maintaining strength (holding PRs). Language friendly.</div>
+          <div class="divider"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COACH ===== -->
+    <section class="wrap section card" id="coach" data-reveal>
+      <h2>Coach</h2>
+      <div class="row coach-row">
+        <img class="coach-photo" src="/static/S5-removebg-preview.png" alt="Coach Shekar" />
+        <div style=" flex:1 ">
+          <div style=" font-weight:900 ">Shekar — YouTuber & creator of the Aesthetic Transformation System</div>
+          <div style=" color:var(--muted); margin-top:var(--s-2) ">
+            I'm Shekar.
+I coach people who’ve tried everything — but still feel stuck. Maybe your hips aren’t reducing. Maybe your routine keeps changing. Maybe you're training hard but not seeing results. I’ve worked with people in that exact place — and helped them finally move forward.
+
+My own journey has been all about testing things, learning from scratch, and pushing through long phases with no shortcuts. I recently attempted 2,500 pull-ups in 14 hours just to prove to myself what consistency can do. That mindset is what I bring into coaching — but I know everyone starts somewhere, and not everyone wants extremes. That’s fine. What matters is we move forward, smart and strong.
+
+I focus on real training — fixing your form, building the right splits for your body, and adjusting things every week based on how you’re responding. I track, I review, I stay involved. And I’ll tell you what’s working and what’s not.
+
+If you’re done guessing and ready to do this with proper structure and support —
+fill the form and let’s start.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="wrap section card" id="faq" data-reveal>
+      <h2>FAQ</h2>
+      <details class="faq-item" style=" margin-bottom:var(--s-2) "><summary>How do form corrections work online?</summary><div style=" color:var(--muted); margin-top:var(--s-2) ">You send short clips; I annotate and send back corrected cues and set-up.</div></details>
+      <details class="faq-item" style=" margin-bottom:var(--s-2) "><summary>Vegetarian / egg-free?</summary><div style=" color:var(--muted); margin-top:var(--s-2) ">Yes. Plans are Indian diet-friendly (veg/non-veg) with protein targets you can hit.</div></details>
+      <details class="faq-item" style=" margin-bottom:var(--s-2) "><summary>I travel often — will I fail?</summary><div style=" color:var(--muted); margin-top:var(--s-2) ">No. Travel templates + step goals + hotel/restaurant swaps.</div></details>
+      <details class="faq-item" style=" margin-bottom:var(--s-2) "><summary>Do I need supplements?</summary><div style=" color:var(--muted); margin-top:var(--s-2) ">Optional. Food first. We add only if needed (e.g., whey, creatine, D3).</div></details>
+      <details class="faq-item" style=" margin-bottom:var(--s-2) "><summary>Refund terms (Day-45 check)</summary><div style=" color:var(--muted); margin-top:var(--s-2) ">If adherence ≥ 80% and no visible change, 30% back. Simple.</div></details>
+      <div class="row" style=" margin-top:var(--s-2) ">
+        <a class="btn btn-wa wa-link" target="_blank" rel="noreferrer" data-i18n="wa">Chat on WhatsApp</a>
+      </div>
+    </section>
+
+
+    <!-- ===== FINAL CLOSE (glass) ===== -->
+    <section class="wrap section card glass" id="close" data-reveal>
+      <h2>Ready to start? Make the next 90 days count.</h2>
+      <div class="row">
+        <a class="btn btn-primary" id="ctaClose" href="#" target="_blank" rel="noopener" data-i18n="heroCta">Start 60-sec Fit Quiz</a>
+        <button class="btn btn-ghost" id="toPricing2">See Pricing</button>
+        <a class="btn btn-wa wa-link" target="_blank" rel="noreferrer" data-i18n="wa">Chat on WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- ===== STICKY BOTTOM BAR ===== -->
+    <div class="sticky-bar" role="region" aria-label="Quick actions">
+      <a class="btn btn-primary" id="ctaSticky" href="#" target="_blank" rel="noopener" data-i18n="heroCta">Start 60-sec Fit Quiz</a>
+      <a class="btn btn-wa wa-link" target="_blank" rel="noreferrer">WhatsApp: Chat now</a>
+    </div>
+
+</div>
+
+  <!-- ===== Lightbox overlay (hidden by default) ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" tabindex="-1">
+    <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+    <img id="lightboxImg" alt="Preview" />
+  </div>
+
+  <script>
+    // ================== CONFIG (EDIT THESE) ==================
+    var WHATSAPP_NUMBER = "910000000000";
+    var DEFAULT_WA_TEXT = "Hi, I want the 90-day plan. I'm __ kg, want to reach __ kg.";
+
+    // Typeform link to apply to all "Start 60-sec Fit Quiz" buttons
+    var TYPEFORM_URL = "https://form.typeform.com/to/k9LxcqV8";
+
+    var DICT = {
+      EN: { heroCta: "Start 60-sec Fit Quiz", wa: "Chat on WhatsApp", preferWa: "Prefer WhatsApp" },
+      TE: { heroCta: "60 సెకన్ల క్విజ్ ప్రారంభించండి", wa: "WhatsApp లో మాట్లాడుదాం", preferWa: "WhatsApp బాగుంటుంది" }
+    };
+
+    function smoothScrollTo(id){ var el = document.getElementById(id); if(el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    function makeWaLink(text){ return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text || DEFAULT_WA_TEXT); }
+    function setAllWaLinks(text){ var href = makeWaLink(text); document.querySelectorAll('.wa-link').forEach(function(a){ a.setAttribute('href', href); }); }
+    function countUpWhenVisible(){
+      var counters = document.querySelectorAll('[data-count]');
+      var seen = new WeakSet();
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting || seen.has(e.target)) return;
+          seen.add(e.target);
+          var el = e.target; var end = parseFloat(el.getAttribute('data-count'));
+          var dur = 900; var start = performance.now();
+          var from = 0; var fmt = el.getAttribute('data-format') || 'int';
+          function tick(t){ var p = Math.min(1, (t - start) / dur); var val = from + (end - from) * p; el.textContent = (fmt === 'int') ? Math.round(val).toString() : val.toFixed(1); if(p < 1) requestAnimationFrame(tick); }
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(function(c){ io2.observe(c); });
+    }
+    function revealOnScroll(){ var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('is-visible'); }); }, { threshold: 0.15 }); document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); }); }
+
+    function setLang(l){
+      try{ localStorage.setItem('lang', l); }catch(e){}
+      document.getElementById('langToggle').textContent = l;
+      document.querySelectorAll('[data-i18n]').forEach(function(node){
+        var key = node.getAttribute('data-i18n');
+        var str = (DICT[l] && DICT[l][key]) ? DICT[l][key] : node.textContent;
+        node.textContent = str;
+      });
+    }
+
+    function bindCarousel(id){
+      var host = document.getElementById(id); if(!host) return;
+      var scroller = host.querySelector('.hscroll'); var prev = host.querySelector('.nav-prev'); var next = host.querySelector('.nav-next');
+      function step(dir){
+        var item = scroller.querySelector('.hitem'); if(!item) return;
+        var gap = parseFloat(getComputedStyle(scroller).gap || '16');
+        var amt = item.getBoundingClientRect().width + gap;
+        scroller.scrollBy({ left: dir * amt, behavior: 'smooth' });
+      }
+      function update(){
+        var max = scroller.scrollWidth - scroller.clientWidth - 4;
+        if(prev) prev.disabled = scroller.scrollLeft <= 4;
+        if(next) next.disabled = scroller.scrollLeft >= max;
+      }
+      if(prev) prev.addEventListener('click', function(){ step(-1); });
+      if(next) next.addEventListener('click', function(){ step(1); });
+      scroller.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+
+    // Lightbox (Results & Receipts)
+    function initSocialLightbox(){
+      var social = document.getElementById('social');
+      if(!social) return;
+      var thumbs = social.querySelectorAll('img.thumb');
+      if(!thumbs.length) return;
+
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightboxImg');
+      var lbClose = document.getElementById('lbClose');
+      var sources = Array.from(thumbs).map(function(img){ return img.getAttribute('data-full') || img.src; });
+      var current = -1;
+
+      function openAt(i){
+        current = i;
+        lbImg.src = sources[i];
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lb.focus();
+      }
+      function close(){
+        lb.classList.remove('open');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+      thumbs.forEach(function(img, i){
+        img.addEventListener('click', function(){ openAt(i); });
+      });
+      lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+      lbClose.addEventListener('click', close);
+      document.addEventListener('keydown', function(e){
+        if(!lb.classList.contains('open')) return;
+        if(e.key === 'Escape') close();
+        else if(e.key === 'ArrowRight') openAt((current + 1) % sources.length);
+        else if(e.key === 'ArrowLeft') openAt((current - 1 + sources.length) % sources.length);
+      });
+    }
+
+    /* ===== INIT ===== */
+    ;(function init(){
+      setAllWaLinks(DEFAULT_WA_TEXT);
+
+      // Apply Typeform link to all "Start 60-sec Fit Quiz" buttons
+      ["ctaHero","ctaClose","ctaSticky"].forEach(function(id){
+        var el = document.getElementById(id);
+        if(el){ el.setAttribute("href", TYPEFORM_URL); el.setAttribute("target","_blank"); el.setAttribute("rel","noopener"); }
+      });
+
+      document.getElementById('toPricing').addEventListener('click', function(){ smoothScrollTo('pricing'); });
+      var toPricing2 = document.getElementById('toPricing2');
+      if(toPricing2) toPricing2.addEventListener('click', function(){ smoothScrollTo('pricing'); });
+
+      revealOnScroll();
+      countUpWhenVisible();
+
+      var stored = 'EN'; try{ stored = localStorage.getItem('lang') || 'EN'; }catch(e){}
+      setLang(stored);
+      document.getElementById('langToggle').addEventListener('click', function(){ setLang(this.textContent === 'EN' ? 'TE' : 'EN'); });
+
+      bindCarousel('proofCarousel');
+      initSocialLightbox();
+    })();
+
+  </script>
+
+   
+</body>
+</html>
