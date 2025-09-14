@@ -252,7 +252,7 @@
       <p class="sub">Plans: 3 / 6 / 12 months • 1:1 coaching • Indian diet • Daily WhatsApp • Video form fixes</p>
       <div class="hero-media">
 <video autoplay controls playsinline poster="https://placehold.co/1200x600?text=Hero+Poster">
-  <source src="22 to 4 percent body fat in 75 days (science-based explained ).mp4" type="video/mp4" />
+  <source src="/static/22 to 4 percent body fat in 75 days (science-based explained ).mp4" type="video/mp4" />
 </video>
 
 
@@ -532,7 +532,7 @@ fill the form and let’s start.</div>
 
   <script>
     // ================== CONFIG (EDIT THESE) ==================
-    var WHATSAPP_NUMBER = "910000000000";
+    var WHATSAPP_NUMBER = "https://wa.link/nrhbfu";
     var DEFAULT_WA_TEXT = "Hi, I want the 90-day plan. I'm __ kg, want to reach __ kg.";
 
     // Typeform link to apply to all "Start 60-sec Fit Quiz" buttons
@@ -544,7 +544,7 @@ fill the form and let’s start.</div>
     };
 
     function smoothScrollTo(id){ var el = document.getElementById(id); if(el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }
-    function makeWaLink(text){ return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text || DEFAULT_WA_TEXT); }
+    function makeWaLink(text){ return "https://wa.link/nrhbfu" ;+ WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text || DEFAULT_WA_TEXT); }
     function setAllWaLinks(text){ var href = makeWaLink(text); document.querySelectorAll('.wa-link').forEach(function(a){ a.setAttribute('href', href); }); }
     function countUpWhenVisible(){
       var counters = document.querySelectorAll('[data-count]');
