@@ -115,7 +115,7 @@
       .grid2{grid-template-columns:1fr}
       .pricing{grid-template-columns:1fr}
       .wrap{padding:var(--s-6) var(--s-4);
-      width: 345px;}
+              width: 407px;}
     }
     /* Desktop upgrades */
     @media (min-width:1064px){
@@ -313,26 +313,46 @@
       </div>
     </section>
 
-    <!-- ===== TRANSPARENCY BOX ===== -->
-    <section class="wrap section card" id="label" data-reveal>
-      <h2>What is inside (and what is not)</h2>
+    <!-- ===== RESULTS & RECEIPTS ===== -->
+    <section class="wrap section card" id="social" data-reveal>
+      <h2>Results & Receipts</h2>
+      <p style=" color:var(--muted) ">Proof that reduces risk: before/after, logs. This answers "Does it work for people like me?"</p>
       <div class="grid2">
         <div class="tile">
-          <strong>Inside the 90-day system</strong>
-          <ul style=" margin:var(--s-2) 0 0 18px; color:var(--text) ">
-            <li>Weekly calories, protein, steps</li>
-            <li>Gym or home workouts + video form fixes</li>
-            <li>Weekly workout form check-ins</li>
-          </ul>
+          <div style=" color:var(--muted) ">Carousel preview</div>
+
+          <!-- Uniform, responsive grid -->
+          <div class="thumb-grid" style=" margin-top:var(--s-2) ">
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/@thakur__gourav_singh 1.jpg" alt="Carousel B/A" />
+            </div>
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/WhatsApp Image 2025-08-31 at 23.27.06_0e42e39f.jpg " alt="InBody sheet 1" />
+            </div>
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/@thakur__gourav_singh 2.jpg" alt="Carousel B/A front" />
+            </div>
+            <div class="thumb-box">
+              <img class="thumb" loading="lazy" src="/static/WhatsApp Image 2.jpg" alt="InBody sheet 2" />
+            </div>
+          </div>
         </div>
         <div class="tile">
-          <strong style=" color:var(--muted) ">Not included (on purpose)</strong>
-          <ul style=" margin:var(--s-2) 0 0 18px; color:var(--muted) ">
-            <li>Crash diets or detox tea promises</li>
-            <li>Fake before/after lighting tricks</li>
-            <li>"4-week abs" nonsense</li>
-            <li>AI spam plans</li>
-          </ul>
+          <div class="metrics"><strong data-count="14" data-format="int">0</strong> check-ins in total 90 days · <strong data-count="89" data-format="int">0</strong>% adherence
+
+Body weight :
+Before - 78.8kg
+After  - 69.1kg
+
+PBF (body fat):
+Before - 31%
+After  - 15.5%
+
+Muscle mass : 
+Before - 30.5%
+After - 33.2%</div>
+          <div style=" color:var(--muted); margin-top:var(--s-2) ">Maintaining strength (holding PRs). Language friendly.</div>
+          <div class="divider"></div>
         </div>
       </div>
     </section>
@@ -383,6 +403,30 @@
   </div>
 </section>
 
+        <!-- ===== TRANSPARENCY BOX ===== -->
+    <section class="wrap section card" id="label" data-reveal>
+      <h2>What is inside (and what is not)</h2>
+      <div class="grid2">
+        <div class="tile">
+          <strong>Inside the 90-day system</strong>
+          <ul style=" margin:var(--s-2) 0 0 18px; color:var(--text) ">
+            <li>Weekly calories, protein, steps</li>
+            <li>Gym or home workouts + video form fixes</li>
+            <li>Weekly workout form check-ins</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <strong style=" color:var(--muted) ">Not included (on purpose)</strong>
+          <ul style=" margin:var(--s-2) 0 0 18px; color:var(--muted) ">
+            <li>Crash diets or detox tea promises</li>
+            <li>Fake before/after lighting tricks</li>
+            <li>"4-week abs" nonsense</li>
+            <li>AI spam plans</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
 <!-- Razorpay Checkout Script -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
@@ -427,49 +471,7 @@ document.querySelectorAll(".pay-btn").forEach(btn => {
 });
 </script>
 
-    <!-- ===== RESULTS & RECEIPTS ===== -->
-    <section class="wrap section card" id="social" data-reveal>
-      <h2>Results & Receipts</h2>
-      <p style=" color:var(--muted) ">Proof that reduces risk: before/after, logs. This answers "Does it work for people like me?"</p>
-      <div class="grid2">
-        <div class="tile">
-          <div style=" color:var(--muted) ">Carousel preview</div>
 
-          <!-- Uniform, responsive grid -->
-          <div class="thumb-grid" style=" margin-top:var(--s-2) ">
-            <div class="thumb-box">
-              <img class="thumb" loading="lazy" src="/static/@thakur__gourav_singh 1.jpg" alt="Carousel B/A" />
-            </div>
-            <div class="thumb-box">
-              <img class="thumb" loading="lazy" src="/static/WhatsApp Image 2025-08-31 at 23.27.06_0e42e39f.jpg " alt="InBody sheet 1" />
-            </div>
-            <div class="thumb-box">
-              <img class="thumb" loading="lazy" src="/static/@thakur__gourav_singh 2.jpg" alt="Carousel B/A front" />
-            </div>
-            <div class="thumb-box">
-              <img class="thumb" loading="lazy" src="/static/WhatsApp Image 2.jpg" alt="InBody sheet 2" />
-            </div>
-          </div>
-        </div>
-        <div class="tile">
-          <div class="metrics"><strong data-count="14" data-format="int">0</strong> check-ins in total 90 days · <strong data-count="89" data-format="int">0</strong>% adherence
-
-Body weight :
-Before - 78.8kg
-After  - 69.1kg
-
-PBF (body fat):
-Before - 31%
-After  - 15.5%
-
-Muscle mass : 
-Before - 30.5%
-After - 33.2%</div>
-          <div style=" color:var(--muted); margin-top:var(--s-2) ">Maintaining strength (holding PRs). Language friendly.</div>
-          <div class="divider"></div>
-        </div>
-      </div>
-    </section>
 
     <!-- ===== COACH ===== -->
     <section class="wrap section card" id="coach" data-reveal>
